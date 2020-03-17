@@ -1,0 +1,28 @@
+安装步骤:
+# 安装 kernel source （emon 依赖 kernel-dev）
+yum install kernel-devel
+
+对应kernel-devel下载地址
+https://pkgs.org/download/kernel-devel
+
+#其他依赖（fedora）
+yum install elfutils-libelf-devel
+yum search jdk
+yum install java-1.8.0-openjdk.x86_64
+
+
+# 安装 emon
+tar -jxvf emon_nda_11_9_linux_05152019.tar.bz2
+# unzip edp-v3.9.zip 公司网络防火墙会自动删除 zip 内的 sh 文件。。弃用 zip 压缩格式
+tar -jxvf edp-v3.9.tar.bz2 
+cd emon_nda_11_9_linux_05152019
+sh install.sh  # 使用 su 用户安装
+
+# 编译相关驱动
+cd <emon 安装目录>/sepdk/src     # 进入 emon 安装路径， 默认在/opt/intel/emon
+	Ø cd /opt/intel/emon/
+	Ø ./build-driver
+
+# 备注，可能需要执行以下命令，有些系统在运行 emon 时提示 pax 与 sep 冲突。 （注意，出现冲突提示后，再回到 emon 安装目录下执行以下命令。  当前不需要！！）
+	Ø cd /opt/intel/emon/
+	Ø rmmod pax
